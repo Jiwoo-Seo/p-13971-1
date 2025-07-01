@@ -1,13 +1,19 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 export default function Page() {
 
-    const posts = [
-        {id: 1, title: "명언 1"},
-        {id: 2, title: "명언 2"},
-        {id: 3, title: "명언 3"},
-        {id: 4, title: "명언 4"},
-    ];
+    const [posts, setPosts] = useState<{id: number, title: string}[]>([]);
+
+    useEffect(() => {
+        setPosts([
+            {id: 1, title: "명언 1"},
+            {id: 2, title: "명언 2"},
+            {id: 3, title: "명언 3"},
+            {id: 4, title: "명언 4"},
+        ]);
+    }, []);
 
   return (
     <>
