@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Page() {
@@ -21,7 +22,7 @@ export default function Page() {
       <ul>
         {posts.map((post) => (
             <li key={post.id}>
-                {post.title}
+                <Link href={`/posts/${post.id}`}>{post.title}</Link>
             </li>
         ))}
       </ul>
