@@ -21,9 +21,13 @@ export default function Page() {
 
       {post == null && <div>로딩중...</div>}
 
-      <div>번호 : {post?.id}</div>
-      <div>제목: {post?.title}</div>
-      <div style={{ whiteSpace: "pre-line" }}>{post?.content}</div>
+      {post != null && (
+        <>
+          <div>번호 : {post?.id}</div>
+          <div>제목: {post?.title}</div>
+          <div style={{ whiteSpace: "pre-line" }}>{post?.content}</div>
+        </>
+      )}
     </>
   );
 }
