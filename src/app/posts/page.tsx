@@ -16,8 +16,9 @@ export default function Page() {
     <>
       <h1>글 목록</h1>
 
+      {posts.length === 0 && <div>로딩중...</div>}
+
       <ul>
-        {posts.length === 0 && <li>로딩중...</li>}
         {posts.map((post) => (
             <li key={post.id}>
                 {post.title}
