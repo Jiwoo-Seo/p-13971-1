@@ -27,20 +27,15 @@ export default function Page() {
       return;
     }
 
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/posts`, {
+    apiFetch(`/api/v1/posts`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-        },
         body: JSON.stringify({
           title: titleInput.value,
           content: contentTextarea.value,
         }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          alert(data.msg);
-        });
+      }).then((data) => {
+        alert(data.msg);
+      });
     };
 
   return (
