@@ -62,6 +62,10 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
     }).then((data) => {
       alert(data.msg);
       contentTextarea.value = "";
+
+      if (postComments == null) return;
+
+      setPostComments([...postComments, data.data]);
     });
   };
 
@@ -114,7 +118,7 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
           <ul>
             {postComments.map((comment) => (
               <li key={comment.id}>
-                {comment.content}
+                {comment.id} : {comment.content}
                 <button
                   className="p-2 rounded border"
                   onClick={() =>
