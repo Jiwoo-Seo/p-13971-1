@@ -7,6 +7,8 @@ export const apiFetch = (url: string, options?: RequestInit) => {
       "Content-Type": "application/json; charset=utf-8",
     };
   }
-  
-  return fetch(`${NEXT_PUBLIC_API_BASE_URL}${url}`).then((res) => res.json());
+
+  return fetch(`${NEXT_PUBLIC_API_BASE_URL}${url}`, options).then((res) =>
+    res.json()
+  );
 };
