@@ -23,12 +23,15 @@ export default function Page({ params }: { params: Promise<{ id: number }> }) {
       router.replace("/posts");
     });
   };
-  
+
   const deleteComment = (id: number, commentId: number) => {
     apiFetch(`/api/v1/posts/${id}/comments/${commentId}`, {
       method: "DELETE",
     }).then((data) => {
       alert(data.msg);
+      if (postComments != null) {
+        setPostComments(postComments.filter((c) => c.id != commentId));
+      }
     });
   };
 
