@@ -6,8 +6,9 @@ import { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 
-export default function Page({ params }: { params: Promise<{ id: number }> }) {
-    const { id } = use(params);
+export default function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id: idStr } = use(params);
+  const id = parseInt(idStr);
     const router = useRouter();
 
     const [post, setPost] = useState< PostWithContentDto | null>(null);
