@@ -1,5 +1,7 @@
 "use client";
 
+import { apiFetch } from "@/lib/backend/clients";
+
 export default function Page() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
