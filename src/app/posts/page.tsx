@@ -22,10 +22,12 @@ export default function Page() {
       {posts.length === 0 && <div>로딩중...</div>}
 
       <ul>
-        {posts.map((post) => (
-            <li key={post.id}>
-                <Link href={`/posts/${post.id}`}>{post.title}</Link>
-            </li>
+      {posts.map((post) => (
+          <li key={post.id}>
+            <Link href={`/posts/${post.id}`}>
+              {post.id} : {post.title}
+            </Link>
+          </li>
         ))}
       </ul>
       <div>
