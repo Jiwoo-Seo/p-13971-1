@@ -167,16 +167,14 @@ function PostCommentWrite({
   );
 }
 
-function PostCommentList({
+function PostCommentListItem({
+  comment,
   postCommentsState,
 }: {
+  comment: PostCommentDto;
   postCommentsState: ReturnType<typeof usePostComments>;
 }) {
-  const {
-    postId,
-    postComments,
-    deleteComment: _deleteComment,
-  } = postCommentsState;
+  const { deleteComment: _deleteComment } = postCommentsState;
 
   const deleteComment = (commentId: number) => {
     if (!confirm(`${commentId}번 댓글을 정말로 삭제하시겠습니까?`)) return;
@@ -185,6 +183,26 @@ function PostCommentList({
       alert(data.msg);
     });
   };
+
+  return (
+    <li>
+      {comment.id} : {comment.content}
+      <button
+        className="p-2 rounded border"
+        onClick={() => deleteComment(comment.id)}
+      >
+        삭제
+      </button>
+    </li>
+  );
+}
+
+function PostCommentList({
+  postCommentsState,
+}: {
+  postCommentsState: ReturnType<typeof usePostComments>;
+}) {
+  const { postId, postComments } = postCommentsState;
 
   if (postComments == null) return <div>로딩중...</div>;
 
@@ -199,15 +217,11 @@ function PostCommentList({
       {postComments != null && postComments.length > 0 && (
         <ul>
           {postComments.map((comment) => (
-            <li key={comment.id}>
-              {comment.id} : {comment.content}
-              <button
-                className="p-2 rounded border"
-                onClick={() => deleteComment(comment.id)}
-              >
-                삭제
-              </button>
-            </li>
+            <PostCommentListItem
+              key={comment.id}
+              comment={comment}
+              postCommentsState={postCommentsState}
+            />
           ))}
         </ul>
       )}
