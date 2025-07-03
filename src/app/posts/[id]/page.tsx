@@ -176,7 +176,7 @@ function PostCommentWrite({
   );
 }
 
-function PostCommentWriteAndList({
+function PostCommentList({
   id,
   postCommentsState,
 }: {
@@ -184,8 +184,6 @@ function PostCommentWriteAndList({
   postCommentsState: ReturnType<typeof usePostComments>;
 }) {
   const { postComments, deleteComment: _deleteComment } = postCommentsState;
-
-  if (postComments == null) return <div>로딩중...</div>;
 
   const deleteComment = (commentId: number) => {
     if (!confirm(`${commentId}번 댓글을 정말로 삭제하시겠습니까?`)) return;
@@ -195,13 +193,11 @@ function PostCommentWriteAndList({
     });
   };
 
+  if (postComments == null) return <div>로딩중...</div>;
+
   return (
     <>
-      <PostCommentWrite id={id} postCommentsState={postCommentsState} />
-
       <h2>댓글 목록</h2>
-
-      {postComments == null && <div>댓글 로딩중...</div>}
 
       {postComments != null && postComments.length == 0 && (
         <div>댓글이 없습니다.</div>
@@ -222,6 +218,22 @@ function PostCommentWriteAndList({
           ))}
         </ul>
       )}
+    </>
+  );
+}
+
+function PostCommentWriteAndList({
+  id,
+  postCommentsState,
+}: {
+  id: number;
+  postCommentsState: ReturnType<typeof usePostComments>;
+}) {
+  return (
+    <>
+      <PostCommentWrite id={id} postCommentsState={postCommentsState} />
+
+      <PostCommentList id={id} postCommentsState={postCommentsState} />
     </>
   );
 }
